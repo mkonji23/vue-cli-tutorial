@@ -35,7 +35,10 @@
 						</template>
 
 						<v-list-item v-for="(v, i) in databases" :key="i" link>
-							<v-list-item-title v-text="v[0]"></v-list-item-title>
+							<v-list-item-title
+								v-text="v[0]"
+								@click="onLinkList(v)"
+							></v-list-item-title>
 							<v-list-item-icon>
 								<v-icon>mdi-database</v-icon>
 							</v-list-item-icon>
@@ -65,10 +68,8 @@
 		</v-app-bar>
 		<!-- 페이지가 들어갈 부분 -->
 		<v-content>
-			<v-container fluid>
-				<!-- 라우터 -->
-				<router-view></router-view>
-			</v-container>
+			<!-- 라우터 -->
+			<router-view></router-view>
 		</v-content>
 
 		<v-footer app>
@@ -88,7 +89,7 @@ export default {
 	data: () => ({
 		drawer: null,
 		databases: [
-			['dbConect', 'people_outline'],
+			['axiosExample', 'people_outline'],
 			['Settings', 'settings'],
 		],
 		cruds: [
@@ -100,6 +101,12 @@ export default {
 	}),
 	created() {
 		this.$vuetify.theme.dark = true;
+	},
+	methods: {
+		onLinkList(item) {
+			console.log(item);
+			this.$router.push({ path: item[0] });
+		},
 	},
 };
 </script>

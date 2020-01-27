@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import mainVue from '../views/MainVue.vue';
+import axiosExample from '../views/example/axiosExample.vue';
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,11 @@ const routes = [{
         // which is lazy-loaded when the route is visited.
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/About.vue'),
+    },
+    {
+        path: '/axiosExample',
+        name: 'axiosExample',
+        component: axiosExample,
     },
 ];
 
