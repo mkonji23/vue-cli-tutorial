@@ -7,7 +7,9 @@
 						<v-icon>mdi-view-dashboard</v-icon>
 					</v-list-item-action>
 					<v-list-item-content>
-						<v-list-item-title>About</v-list-item-title>
+						<v-list-item-title @click="onLink('About')">
+							About</v-list-item-title
+						>
 					</v-list-item-content>
 				</v-list-item>
 				<v-list-item link>
@@ -34,11 +36,13 @@
 							</v-list-item-content>
 						</template>
 
-						<v-list-item v-for="(v, i) in databases" :key="i" link>
-							<v-list-item-title
-								v-text="v[0]"
-								@click="onLinkList(v)"
-							></v-list-item-title>
+						<v-list-item
+							v-for="(v, i) in databases"
+							:key="i"
+							link
+							@click="onLinkList(v)"
+						>
+							<v-list-item-title v-text="v[0]"></v-list-item-title>
 							<v-list-item-icon>
 								<v-icon>mdi-database</v-icon>
 							</v-list-item-icon>
@@ -104,8 +108,11 @@ export default {
 	},
 	methods: {
 		onLinkList(item) {
-			console.log(item);
-			this.$router.push({ path: item[0] });
+			if (this.$route.path !== '/' + item[0])
+				this.$router.push({ path: item[0] });
+		},
+		onLink(path) {
+			if (this.$route.path !== '/' + path) this.$router.push({ path: path });
 		},
 	},
 };
